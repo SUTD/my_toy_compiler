@@ -1,11 +1,7 @@
 all: parser
 
 OBJS = parser.o  \
-       codegen.o \
-       main.o    \
        tokens.o  \
-       corefn.o  \
-	   native.o  \
 
 LLVMCONFIG = llvm-config
 CPPFLAGS = `$(LLVMCONFIG) --cppflags` -std=c++11
@@ -20,7 +16,7 @@ parser.cpp: parser.y
 	
 parser.hpp: parser.cpp
 
-tokens.cpp: tokens.l parser.hpp
+tokens.cpp: tokens.l parser.hpp header.hpp
 	flex -o $@ $^
 
 %.o: %.cpp
